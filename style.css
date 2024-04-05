@@ -1,4 +1,41 @@
-#mainimage img {
+.aaah img {
   max-width: 100vw;
   max-height: 100vh;
+  width: 100vw;
+  height: 99.6vh;
+}
+
+.aaah {
+  position: absolute;
+}
+
+#thumbnails img {
+  height: 100px;
+  width: auto;
+}
+
+#thumbnails {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+#arrows {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+  height: 60vh;
+}
+
+#arrows button {
+  font-size: 50px;
+}
+
+* {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
 }
