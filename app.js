@@ -1,6 +1,7 @@
 const mainImage = document.getElementById("mainImage");
 const thumbnails = document.getElementById("thumbnails");
 const fwrd = document.getElementById("fwrd");
+const elements = document.querySelectorAll("input, button, image, textarea, a");
 const gallery = [
   {
     url: "./assets/chill blowfish.jpg",
@@ -21,18 +22,30 @@ const gallery = [
 ];
 
 function createThumbnails() {
-  gallery.forEach(function (image) {
+  gallery.forEach(function (image, index) {
     const img = document.createElement("img");
     img.src = image.url;
     img.alt = image.alt;
+    img.tabIndex = 0;
     thumbnails.appendChild(img);
     img.addEventListener("click", function () {
-      createMainImage(image);
+      indexNumber = index;
+      createMainImage(image, index);
+      console.log("Thumbnail image selected, image switched.");
+      console.log(indexNumber);
+    });
+    img.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        indexNumber = index;
+        createMainImage(image, index);
+        console.log("Thumbnail image selected, image switched.");
+        console.log(indexNumber);
+      }
     });
   });
 }
 
-function createMainImage(image) {
+function createMainImage(image, index) {
   mainImage.innerHTML = "";
   const mainImageElement = document.createElement("img");
 
@@ -66,10 +79,26 @@ function imagebutton(index) {
 }
 fwrd.addEventListener("click", function () {
   imagebutton(1);
+  console.log("Right button clicked, image switched.");
 });
 
 bwrd.addEventListener("click", function () {
   imagebutton(-1);
+  console.log("Left button clicked, image switched.");
+});
+
+document.addEventListener("keydown", function arrowkeyright(event) {
+  if (event.key == "ArrowRight" && indexNumber < gallery.length - 1) {
+    imagebutton(1);
+    console.log("Right arrow key pressed, image switched.");
+  }
+});
+
+document.addEventListener("keydown", function arrowkeyleft(event) {
+  if (event.key == "ArrowLeft" && indexNumber > 0) {
+    imagebutton(-1);
+    console.log("Left arrow key pressed, image switched.");
+  }
 });
 
 createThumbnails();
